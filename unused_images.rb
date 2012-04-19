@@ -23,7 +23,7 @@ end
 image_dir = ARGV[0]
 source_dir = ARGV[1]
 
-sources = files_in_dir('./source')
+sources = files_in_dir(source_dir)
 images = files_in_dir(image_dir)
 
 images.each do |image|
