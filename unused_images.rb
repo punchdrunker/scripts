@@ -7,7 +7,7 @@
 def files_in_dir(item, images = [])
   if FileTest.directory?(item) then
     Dir.foreach( item ) do |file|
-      next if /^\.+$/ =~ file
+      next if /^\.{1,2}$/ =~ file
       files_in_dir( item.sub(/\/+$/,"") + "/" + file, images)
     end
   else
