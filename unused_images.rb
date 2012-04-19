@@ -1,5 +1,5 @@
 =begin
-   プログラム中で参照されていない画像ファイルを検出するスクリプト
+   Objective-Cなプログラム中で参照されていない画像ファイルを検出するスクリプト
    usage:
      ruby unused_images.rb [image_dir] [source_code_dir]
 =end
