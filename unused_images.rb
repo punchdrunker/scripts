@@ -16,6 +16,18 @@ def files_in_dir(item, images = [])
   return images
 end
 
+def find_image(file, image)
+  if (/\.m/ =~ File.basename(file) || /\.xib/ =~ File.basename(file))
+    keyword = File.basename(image, '.*')
+  else
+    return []
+  end
+  keyword.sub!('@2x', '')
+
+  result = open(file).grep(/#{keyword}/)
+  return result
+end
+
 unless ARGV.length==2
   abort 'usage: ruby unused_images.rb [image_dir] [source_code_dir]'
 end
@@ -27,12 +39,10 @@ sources = files_in_dir(source_dir)
 images = files_in_dir(image_dir)
 
 images.each do |image|
-  keyword = '@"' + File.basename(image, '.*') + '"'
-  keyword.sub!('@2x', '')
   count = 0
   sources.each do|source|
-    result = open(source).grep(/#{keyword}/)
-      count += result.length
+    result = find_image(source, image)
+    count += result.length
   end
   puts image + "\n" if count==0
 end
